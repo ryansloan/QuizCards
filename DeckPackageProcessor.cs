@@ -64,7 +64,7 @@ namespace QuizCards
                     }
                 }
             }
-            await Task.Delay(1000);
+
             //kick off processXml, return result of that.
             return processXml();
         }
