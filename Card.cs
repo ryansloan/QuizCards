@@ -48,21 +48,6 @@ namespace QuizCards
         {
             return this.image;
         }
-        /*public String getSideALabel() {
-            return this.sideALabel;
-        }
-        public String getSideBLabel() {
-            return this.sideBLabel;
-        }
-        public void setSideALabel(String sA)
-        {
-            this.sideBLabel = sA;
-        }
-        public void setSideBLabel(String sB)
-        {
-            this.sideBLabel = sB;
-        }*/
-
         public void setImage(String s)
         {
             this.image = new BitmapImage();

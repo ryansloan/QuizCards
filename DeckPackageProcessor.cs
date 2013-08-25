@@ -30,7 +30,6 @@ namespace QuizCards
         {
             //Locate Archive based on this.packagePath
             var folder = ApplicationData.Current.LocalFolder;
-            /*StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/test.zip"));*/
             //Open Archive
             Stream stream = await file.OpenStreamForReadAsync();
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
