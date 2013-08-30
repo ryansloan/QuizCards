@@ -102,5 +102,12 @@ namespace QuizCards
 
             return this.cards;
         }
+        public void disposeOfBitmaps()
+        {
+            foreach (Card c in this.cards)
+            {
+                c.emptyBitmap();
+            }
+        }
     }
 }

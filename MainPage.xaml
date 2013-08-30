@@ -19,6 +19,7 @@
             <Button x:Name="NextCardBtn" Content="Next Card" HorizontalAlignment="Right" Height="44" Margin="0,445,508,0" VerticalAlignment="Top" Width="148" RenderTransformOrigin="0.027,0.636" Click="NextCardBtn_Click" Visibility="Collapsed"/>
         <Button x:Name="PrevCardBtn" Content="Previous Card" HorizontalAlignment="Left" Height="44" Margin="509,445,0,0" VerticalAlignment="Top" Width="148" Click="PrevCardBtn_Click"  Visibility="Collapsed"/>
         <TextBlock x:Name="DeckTitleBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="48"/>
+        <Button x:Name="DeckLoad" Content="Load different deck" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Click="DeckLoad_Click"/>
 
     </Grid>
 </Page>

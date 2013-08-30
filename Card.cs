@@ -51,6 +51,7 @@ namespace QuizCards
         public void setImage(String s)
         {
             this.image = new BitmapImage();
+            this.image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
             this.image.UriSource = new Uri(s);
         }
         public void setImage(BitmapImage bi)
@@ -60,6 +61,11 @@ namespace QuizCards
         public string toString()
         {
             return this.sideALabel + " - " + this.sideBLabel;
+        }
+        public void emptyBitmap()
+        {
+            this.image.UriSource = null;
+            this.image = null;
         }
     }
 }

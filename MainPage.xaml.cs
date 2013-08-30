@@ -72,6 +72,17 @@ namespace QuizCards
                 this.currentCard = this.currentDeck.getNextCard();
                 this.updateVisibleCard();
         }
+        private void clearUI()
+        {
+            SideBLabel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            SideALabel.Text = "";
+            SideBLabel.Text = "";
+            FlipCardBtn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            PrevCardBtn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            NextCardBtn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            SideAImage.Source = null;
+            
+        }
         private void updateVisibleCard()
         {
             SideBLabel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
@@ -152,6 +163,13 @@ namespace QuizCards
             {
                 SideBLabel.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
+        }
+
+        private void DeckLoad_Click(object sender, RoutedEventArgs e)
+        {
+            this.currentDeck.disposeOfBitmaps();
+            clearUI();
+            loadData();
         }
     }
 }

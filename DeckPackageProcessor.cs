@@ -31,39 +31,42 @@ namespace QuizCards
             //Locate Archive based on this.packagePath
             var folder = ApplicationData.Current.LocalFolder;
             //Open Archive
-            Stream stream = await file.OpenStreamForReadAsync();
-            using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
+            using (Stream stream = await file.OpenStreamForReadAsync())
             {
-                foreach (ZipArchiveEntry en in archive.Entries)
-                {             //Iterate through Entries
-                    if (en.FullName.Contains("deckdescription.xml"))
-                    {
-                        char[] output = new char[en.Length];
+                using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
+                {
+                    foreach (ZipArchiveEntry en in archive.Entries)
+                    {             //Iterate through Entries
+                        Debug.WriteLine("Writing " + en.Name);
+                        if (en.FullName.Contains("deckdescription.xml"))
+                        {
+                            char[] output = new char[en.Length];
 
-                        using (StreamReader sr = new StreamReader(en.Open()))
-                        {
-                            //Open deckdescription.xml and save it into deckXml
-                            await sr.ReadAsync(output, 0, (int)en.Length);
-                            this.deckXml = new String(output);
-                        }
-                    }
-                    else if (en.FullName.EndsWith(".jpg") || en.FullName.EndsWith(".jpeg") || en.FullName.EndsWith(".png"))
-                    {
-                        //Copy Images to LocalStorage
-                        using (Stream picdata = en.Open())
-                        {
-                            StorageFile outfile = await folder.CreateFileAsync(en.Name, CreationCollisionOption.ReplaceExisting);
-                            using (Stream outputfilestream = await outfile.OpenStreamForWriteAsync())
+                            using (StreamReader sr = new StreamReader(en.Open()))
                             {
-                                await picdata.CopyToAsync(outputfilestream);
-                                await outputfilestream.FlushAsync(); //flush makes sure all the bits are written
+                                //Open deckdescription.xml and save it into deckXml
+                                await sr.ReadAsync(output, 0, (int)en.Length);
+                                this.deckXml = new String(output);
                             }
-
                         }
+                        else if (en.FullName.EndsWith(".jpg") || en.FullName.EndsWith(".jpeg") || en.FullName.EndsWith(".png"))
+                        {
+                            //Copy Images to LocalStorage
+                            using (Stream picdata = en.Open())
+                            {
+                                StorageFile outfile = await folder.CreateFileAsync(en.Name, CreationCollisionOption.ReplaceExisting);
+                                using (Stream outputfilestream = await outfile.OpenStreamForWriteAsync())
+                                {
+                                    await picdata.CopyToAsync(outputfilestream);
+                                    await outputfilestream.FlushAsync(); //flush makes sure all the bits are written
+                                }
+
+                            }
+                        }
+                        Debug.WriteLine("Wrote " + en.Name);
                     }
                 }
             }
-
             //kick off processXml, return result of that.
             return processXml();
         }
