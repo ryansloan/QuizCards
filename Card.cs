@@ -64,8 +64,11 @@ namespace QuizCards
         }
         public void emptyBitmap()
         {
-            this.image.UriSource = null;
-            this.image = null;
+            if (this.image != null)
+            {
+                this.image.UriSource = null;
+                this.image = null;
+            }
         }
     }
 }

@@ -8,18 +8,17 @@
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" ManipulationStarted="Card_ManipulationStarted" ManipulationMode="All" ManipulationCompleted="Card_ManipulationCompleted" ManipulationDelta="Card_ManipulationDelta">
-        <Grid Background="White" HorizontalAlignment="Center" Height="280" Margin="0,160,0,0" VerticalAlignment="Top" Width="560" Tapped="Card_Tapped">
-            <Rectangle Fill="#FFFFFF" HorizontalAlignment="Center" Height="280" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="560"/>
-            <TextBlock x:Name="SideALabel" HorizontalAlignment="Left" Margin="114,146,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="44" RenderTransformOrigin="0.5,0.5" Width="329" FontFamily="Segoe UI Light" FontSize="36" Foreground="#FF444444" TextAlignment="Center"/>
-            <TextBlock x:Name="SideBLabel"  HorizontalAlignment="Left" Margin="114,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="44" RenderTransformOrigin="0.5,0.5" Width="329" FontFamily="Segoe UI Light" FontSize="36" Foreground="#FF444444" TextAlignment="Center"/>
-            <Image x:Name="SideAImage" HorizontalAlignment="Center" Height="138" Margin="0,5,0,0" VerticalAlignment="Top" Width="432" RenderTransformOrigin="-0.06,-0.2" />
-            <ProgressRing x:Name="progring" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Grid>
-        <Button x:Name="FlipCardBtn" Content="Flip" HorizontalAlignment="Center" Height="44" Margin="613,111,605,0" VerticalAlignment="Top" RenderTransformOrigin="0.027,0.636" Click="FlipCardBtn_Click"  Visibility="Collapsed"/>
-            <Button x:Name="NextCardBtn" Content="Next Card" HorizontalAlignment="Right" Height="44" Margin="0,445,508,0" VerticalAlignment="Top" Width="148" RenderTransformOrigin="0.027,0.636" Click="NextCardBtn_Click" Visibility="Collapsed"/>
-        <Button x:Name="PrevCardBtn" Content="Previous Card" HorizontalAlignment="Left" Height="44" Margin="509,445,0,0" VerticalAlignment="Top" Width="148" Click="PrevCardBtn_Click"  Visibility="Collapsed"/>
-        <TextBlock x:Name="DeckTitleBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="48"/>
-        <Button x:Name="DeckLoad" Content="Load different deck" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Click="DeckLoad_Click"/>
+        <StackPanel Background="White" HorizontalAlignment="Center" Height="385" Margin="0,160,0,0" VerticalAlignment="Top" Width="624" Tapped="Card_Tapped">
+            <Image x:Name="SideAImage" HorizontalAlignment="Center" Height="180" VerticalAlignment="Top" Width="200" RenderTransformOrigin="-0.06,-0.2" />
+            <TextBlock x:Name="SideALabel" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="80" RenderTransformOrigin="0.5,0.5" Width="Auto" FontFamily="Segoe UI Light" FontSize="36" Foreground="#FF444444" TextAlignment="Center"/>
+            <TextBlock x:Name="SideBLabel"  HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="124" RenderTransformOrigin="0.5,0.5" Width="Auto"  FontFamily="Segoe UI Light" FontSize="36" Foreground="#FF444444" TextAlignment="Center"/>
+        </StackPanel>
+        <ProgressRing x:Name="progring" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button x:Name="FlipCardBtn" Content="" HorizontalAlignment="Center" Height="44" Width="Auto" Margin="665,92,667,0" VerticalAlignment="Top" Click="FlipCardBtn_Click" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Visibility="Collapsed" />
+        <Button x:Name="NextCardBtn" Content="Next" HorizontalAlignment="Right" Height="58" Margin="0,315,59,0" VerticalAlignment="Top" Width="249" RenderTransformOrigin="0.027,0.636" Click="NextCardBtn_Click" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="36"/>
+        <Button x:Name="PrevCardBtn" Content="Previous" HorizontalAlignment="Left" Height="58" Margin="73,315,0,0" VerticalAlignment="Top" Width="233" Click="PrevCardBtn_Click" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="36"/>
+        <TextBlock x:Name="DeckTitleBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="72"/>
+        <Button x:Name="DeckLoad" Content="Load different deck" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Click="DeckLoad_Click" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="14" />
 
     </Grid>
 </Page>
