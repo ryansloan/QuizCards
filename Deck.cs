@@ -1,22 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace QuizCards
 {
-    public class Deck
+    public class Deck : INotifyPropertyChanged
     {
         private String title;
-        private String sideAName;
-        private String sideBName;
-        private List<Card> cards;
+        private String _sideAName;
+        public String sideAName
+        {
+            get
+            {
+                return this._sideAName;
+            }
+            set
+            {
+                if (value == this._sideAName)
+                {
+                    return;
+                }
+                else
+                {
+                    this._sideAName = value;
+                    OnPropertyChanged("sideAName");
+                }
+            }
+        }
+        private String _sideBName;
+        public String sideBName
+        {
+            get
+            {
+                return this._sideBName;
+            }
+            set
+            {
+                if (value == this._sideBName)
+                {
+                    return;
+                }
+                else
+                {
+                    this._sideBName = value;
+                    OnPropertyChanged("sideBName");
+                }
+            }
+        }
+        public ObservableCollection<Card> cards { get; set; }
         private int index = -1;
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
         public Deck()
         {
-            cards = new List<Card>();
+            cards = new ObservableCollection<Card>();
         }
 
         public String getTitle()
@@ -97,7 +142,7 @@ namespace QuizCards
         {
             return this.cards.Count;
         }
-        public List<Card> getCards()
+        public ObservableCollection<Card> getCards()
         {
 
             return this.cards;

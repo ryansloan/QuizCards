@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,11 +8,57 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace QuizCards
 {
-    public class Card
+    public class Card : INotifyPropertyChanged
     {
-        public String sideALabel { get; set; }
-        public String sideBLabel { get; set; }
+        private String _sideALabel;
+        private String _sideBLabel;
+        public String sideALabel
+        {
+            get
+            {
+                return this._sideALabel;
+            }
+            set
+            {
+                if (value == this._sideBLabel)
+                {
+                    return;
+                }
+                else
+                {
+                    this._sideALabel = value;
+                    OnPropertyChanged("sideALabel");
+                }
+            }
+        }
+        public String sideBLabel
+        {
+            get
+            {
+                return this._sideBLabel;
+            }
+            set
+            {
+                if (value==this._sideBLabel)
+                {
+                    return;
+                }
+                else
+                {
+                    this._sideBLabel = value;
+                    OnPropertyChanged("sideBLabel");
+                }
+            }
+        }
         private BitmapImage image;
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public Card()
         {
