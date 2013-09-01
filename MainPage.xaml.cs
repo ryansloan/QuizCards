@@ -26,7 +26,6 @@ namespace QuizCards
     public sealed partial class MainPage : Page
     {
         public Deck currentDeck = null;
-        public Card currentCard = null;
         private Point initialPt;
         private bool enableManipulation=false;
         public MainPage()
@@ -58,44 +57,28 @@ namespace QuizCards
             progring.IsActive = false;
             NextCardBtn.Visibility = Visibility.Visible;
             PrevCardBtn.Visibility = Visibility.Visible;
-            FlipCardBtn.Visibility = Visibility.Visible;
             this.currentDeck = dpp.deck;
             this.currentDeck.shuffle();
-            DeckTitleBlock.Text = this.currentDeck.getTitle();
-            this.currentCard=this.currentDeck.getNextCard();
-            FlipCardBtn.Content = "Show " + this.currentDeck.getSideBName();
+            this.DataContext = this.currentDeck;
+            CardStackPanel.DataContext = this.currentDeck.getNextCard();
             this.updateVisibleCard();
         }
 
         private void NextCardBtn_Click(object sender, RoutedEventArgs e)
         {
-                this.currentCard = this.currentDeck.getNextCard();
-                this.updateVisibleCard();
+            CardStackPanel.DataContext = this.currentDeck.getNextCard();
+            this.updateVisibleCard();
         }
         private void clearUI()
         {
             SideBLabel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            SideALabel.Text = "";
-            SideBLabel.Text = "";
-            FlipCardBtn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             PrevCardBtn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             NextCardBtn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            SideAImage.Source = null;
             
         }
         private void updateVisibleCard()
         {
             SideBLabel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            SideALabel.Text = this.currentCard.sideALabel;
-            SideBLabel.Text = this.currentCard.sideBLabel;
-            if (this.currentCard.hasImage())
-            {
-                SideAImage.Source = this.currentCard.getImage();
-            }
-            else
-            {
-                SideAImage.Source = null;
-            }
             if (this.currentDeck.isNextCard()) { this.NextCardBtn.IsEnabled=true; }
             else { this.NextCardBtn.IsEnabled=false; }
             if (this.currentDeck.isPreviousCard()) { this.PrevCardBtn.IsEnabled = true; }
@@ -104,8 +87,7 @@ namespace QuizCards
 
         private void PrevCardBtn_Click(object sender, RoutedEventArgs e)
         {
-
-                this.currentCard = this.currentDeck.getPreviousCard();
+                CardStackPanel.DataContext = this.currentDeck.getNextCard();
                 this.updateVisibleCard();
 
         }
@@ -124,13 +106,13 @@ namespace QuizCards
                 if ((curr.X-this.initialPt.X > swipeThreshold) && (this.currentDeck.isPreviousCard()))
                 {
                 this.enableManipulation = false;
-                this.currentCard = this.currentDeck.getPreviousCard();
+                CardStackPanel.DataContext = this.currentDeck.getPreviousCard();
                 this.updateVisibleCard();
                 }
                 if ((this.initialPt.X - curr.X > swipeThreshold)&&(this.currentDeck.isNextCard()))
                 {
                 this.enableManipulation = false;
-                this.currentCard = this.currentDeck.getNextCard();
+                CardStackPanel.DataContext = this.currentDeck.getNextCard();
                 this.updateVisibleCard();
                 }
             }

@@ -10,7 +10,27 @@ namespace QuizCards
 {
     public class Deck : INotifyPropertyChanged
     {
-        private String title;
+        private String _title;
+        public String title
+        {
+            get
+            {
+                return this._title;
+            }
+            set
+            {
+                if (value == this._title)
+                {
+                    return;
+                }
+                else
+                {
+                    this._title = value;
+                    OnPropertyChanged("title");
+                }
+
+            }
+        }
         private String _sideAName;
         public String sideAName
         {

@@ -50,8 +50,14 @@ namespace QuizCards
                 }
             }
         }
-        private BitmapImage image;
-
+        private BitmapImage _image;
+        public BitmapImage image
+        {
+            get
+            {
+                return this._image;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -64,46 +70,42 @@ namespace QuizCards
         {
             this.sideALabel = null;
             this.sideBLabel = null;
-            this.image = null;
+            this._image = null;
         }
 
         public Card(String sA, String sB)
         {
             this.sideALabel = sA;
             this.sideBLabel = sB;
-            this.image = null;
+            this._image = null;
         }
         public Card(String sA, String sB, BitmapImage i)
         {
             this.sideALabel = sA;
             this.sideBLabel = sB;
-            this.image = i;
+            this._image = i;
         }
         public Card(String sA, String sB, String i)
         {
             this.sideALabel = sA;
             this.sideBLabel = sB;
-            this.image = new BitmapImage();
-            this.image.UriSource = new Uri(i);
+            this._image = new BitmapImage();
+            this._image.UriSource = new Uri(i);
 
         }
         public bool hasImage()
         {
-            return this.image != null;
-        }
-        public BitmapImage getImage()
-        {
-            return this.image;
+            return this._image != null;
         }
         public void setImage(String s)
         {
-            this.image = new BitmapImage();
-            this.image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            this.image.UriSource = new Uri(s);
+            this._image = new BitmapImage();
+            this._image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            this._image.UriSource = new Uri(s);
         }
         public void setImage(BitmapImage bi)
         {
-            this.image = bi;
+            this._image = bi;
         }
         public string toString()
         {
@@ -111,10 +113,10 @@ namespace QuizCards
         }
         public void emptyBitmap()
         {
-            if (this.image != null)
+            if (this._image != null)
             {
-                this.image.UriSource = null;
-                this.image = null;
+                this._image.UriSource = null;
+                this._image = null;
             }
         }
     }
