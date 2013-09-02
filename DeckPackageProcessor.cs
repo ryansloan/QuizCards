@@ -29,41 +29,37 @@ namespace QuizCards
         public async Task<bool> readPackageAsync(StorageFile file)
         {
             //Locate Archive based on this.packagePath
-            var folder = ApplicationData.Current.LocalFolder;
+            var folder = ApplicationData.Current.TemporaryFolder;
             //Open Archive
-            using (Stream stream = await file.OpenStreamForReadAsync())
+            Stream stream = await file.OpenStreamForReadAsync();
+            using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
-                using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
-                {
-                    foreach (ZipArchiveEntry en in archive.Entries)
-                    {             //Iterate through Entries
-                        Debug.WriteLine("Writing " + en.Name);
-                        if (en.FullName.Contains("deckdescription.xml"))
-                        {
-                            char[] output = new char[en.Length];
+                foreach (ZipArchiveEntry en in archive.Entries)
+                {             //Iterate through Entries
+                    if (en.FullName.Contains("deckdescription.xml"))
+                    {
+                        char[] output = new char[en.Length];
 
-                            using (StreamReader sr = new StreamReader(en.Open()))
-                            {
-                                //Open deckdescription.xml and save it into deckXml
-                                await sr.ReadAsync(output, 0, (int)en.Length);
-                                this.deckXml = new String(output);
-                            }
-                        }
-                        else if (en.FullName.EndsWith(".jpg") || en.FullName.EndsWith(".jpeg") || en.FullName.EndsWith(".png"))
+                        using (StreamReader sr = new StreamReader(en.Open()))
                         {
-                            //Copy Images to LocalStorage
-                            using (Stream picdata = en.Open())
-                            {
-                                StorageFile outfile = await folder.CreateFileAsync(en.Name, CreationCollisionOption.ReplaceExisting);
-                                using (Stream outputfilestream = await outfile.OpenStreamForWriteAsync())
-                                {
-                                    await picdata.CopyToAsync(outputfilestream);
-                                    await outputfilestream.FlushAsync(); //flush makes sure all the bits are written
-                                }
-
-                            }
+                            //Open deckdescription.xml and save it into deckXml
+                            await sr.ReadAsync(output, 0, (int)en.Length);
+                            this.deckXml = new String(output);
                         }
-                        Debug.WriteLine("Wrote " + en.Name);
+                    }
+                    else if (en.FullName.EndsWith(".jpg") || en.FullName.EndsWith(".jpeg") || en.FullName.EndsWith(".png"))
+                    {
+                        //Copy Images to LocalStorage - Tmp Folder
+                        using (Stream picdata = en.Open())
+                        {
+                            StorageFile outfile = await folder.CreateFileAsync(en.Name, CreationCollisionOption.ReplaceExisting);
+                            using (Stream outputfilestream = await outfile.OpenStreamForWriteAsync())
+                            {
+                                await picdata.CopyToAsync(outputfilestream);
+                                await outputfilestream.FlushAsync(); //flush makes sure all the bits are written
+                            }
+
+                        }
                     }
                 }
             }
@@ -137,7 +133,7 @@ namespace QuizCards
                                 }
                                 else if (reader.Name.Equals("sideaimage"))
                                 {
-                                    currentCard.setImage("ms-appdata:///local/" + reader.ReadElementContentAsString());
+                                    currentCard.setImage("ms-appdata:///temp/" + reader.ReadElementContentAsString());
                                 }
 
                             }
@@ -164,6 +160,101 @@ namespace QuizCards
             return false;
         }
 
+        public async Task<bool> writePackageAsync(StorageFile file, Deck outDeck)
+        {
+            this.deck = outDeck;
+            StorageFolder tmpFolder = ApplicationData.Current.TemporaryFolder;
+            //create a MemoryStream to build ZipArchive in Memory
+            using (MemoryStream zipStream = new MemoryStream())
+            {
+
+                //Create ZipArchive using MemoryStream
+                using (ZipArchive archive = new ZipArchive(zipStream,ZipArchiveMode.Create,true)) { //leave zipstream open so we can copy from it later.
+                    //Write File(s) to ZipArchive as entries
+                    //for every image referenced by a card, we'll need to copy them over
+                    String[] segments;
+                    ZipArchiveEntry en;
+                    foreach (Card c in this.deck.cards)
+                    {
+                        if (c.hasImage())
+                        {
+                            segments = c.image.UriSource.Segments;
+                            StorageFile inFile = await tmpFolder.GetFileAsync(segments[segments.Count() - 1]); //to be copied
+
+                            using (Stream s = await inFile.OpenStreamForReadAsync()) //incoming stream
+                            {
+                                en = archive.CreateEntry(segments[segments.Count() - 1]);
+                                using (Stream sout = en.Open()) //outgoing stream. Can't use en.Open() directly because it won't get properly disposed.
+                                {
+                                    await s.CopyToAsync(sout);
+                                }
+                            }
+                        }
+
+                    }
+                    //Then we write the deck description file
+                    deckToXml();
+                    en = archive.CreateEntry("deckdescription.xml");
+                    using (StreamWriter sw = new StreamWriter(en.Open()))
+                    {
+                        sw.Write(this.deckXml);
+                    }
+
+                }
+            //Copy MemoryStream (entire Zip Archive) to file specified
+                zipStream.Position = 0;
+                using (Stream s = await file.OpenStreamForWriteAsync())
+                {
+                    zipStream.CopyTo(s);
+                }
+            }
+
+            return false;
+        }
+
+        public bool deckToXml()
+        {
+            String[] segments;
+            if (this.deck != null)
+            {
+                StringBuilder s = new StringBuilder();
+                s.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                s.AppendLine("<deck>");
+                s.Append("<title>");
+                s.Append(this.deck.title);
+                s.AppendLine("</title>");
+                s.Append("<description>");
+                s.Append("");
+                s.AppendLine("</description>");
+                s.Append("<sideaname>");
+                s.Append(this.deck.sideAName);
+                s.AppendLine("</sideaname>");
+                s.Append("<sidebname>");
+                s.Append(this.deck.sideBName);
+                s.AppendLine("</sidebname>");
+                s.AppendLine("<cards>");
+                foreach (Card c in this.deck.cards)
+                {
+                    s.AppendLine("<card>");
+                    s.AppendLine("<sidealabel>" + c.sideALabel + "</sidealabel>");
+                    s.AppendLine("<sideblabel>" + c.sideBLabel + "</sideblabel>");
+                    if (c.hasImage())
+                    {
+                        segments = c.image.UriSource.Segments;
+                        s.AppendLine("<sideaimage>"+ segments[segments.Count()-1] +"</sideaimage>");
+                    }
+                    s.AppendLine("</card>");
+                }
+                s.AppendLine("</cards>");
+                s.AppendLine("</deck>");
+                this.deckXml = s.ToString();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }
