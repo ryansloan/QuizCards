@@ -40,14 +40,17 @@ namespace QuizCards
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {            
-            //For now just kick off the load operations.
-            loadData();
+            //e.Parameter should contain file.
+            if (e.Parameter != null)
+            {
+                progring.IsEnabled = true;
+                progring.IsActive = true;
+                loadData(e.Parameter as StorageFile);
+
+            }
         }
-        private async void loadData() {
+        private async void loadData(StorageFile file) {
             //File Picker, feed to processor, wait and show progress
-            FileOpenPicker picker = new FileOpenPicker();
-            picker.FileTypeFilter.Add(".zip");
-            StorageFile file = await picker.PickSingleFileAsync();
             DeckPackageProcessor dpp = new DeckPackageProcessor();
             progring.IsEnabled = true;
             progring.IsActive = true;
@@ -147,11 +150,11 @@ namespace QuizCards
             }
         }
 
-        private void DeckLoad_Click(object sender, RoutedEventArgs e)
+        private void BackBtn_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            this.currentDeck.disposeOfBitmaps();
-            clearUI();
-            loadData();
+            ((Deck)this.DataContext).disposeOfBitmaps();
+            this.Frame.GoBack();
         }
+
     }
 }

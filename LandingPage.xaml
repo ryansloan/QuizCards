@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="QuizCards.LandingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:QuizCards"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+            <TextBlock x:Name="AppTitle" HorizontalAlignment="Left" Margin="120,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="72" Text="QuizCards"/>
+        <Button Margin="638,104,0,640" Content="Open Deck" x:Name="DeckLoadBtn" Tapped="DeckLoadBtn_Tapped">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="OpenDeckPlus" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="18" />
+                        <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="{TemplateBinding Content}" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Grid>
+</Page>
