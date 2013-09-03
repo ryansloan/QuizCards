@@ -13,8 +13,8 @@
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="OpenDeckPlus" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="18" />
-                        <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" Text="{TemplateBinding Content}" />
+                        <TextBlock x:Name="OpenDeckPlus" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
+                        <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
                     </StackPanel>
                 </ControlTemplate>
             </Button.Template>

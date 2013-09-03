@@ -13,7 +13,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
@@ -45,13 +45,13 @@
         <ProgressRing x:Name="progressRing" HorizontalAlignment="Center" VerticalAlignment="Center" IsActive="false" IsEnabled="false" Foreground="#ffffff" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
     </Grid>
     <Page.BottomAppBar>
-        <AppBar Background="#ff0000" x:Name="SummaryAppBar">
+        <AppBar Background="#633419" x:Name="SummaryAppBar">
             <Grid>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="" x:Name="FlipCardbtn" HorizontalAlignment="Left" AutomationProperties.Name="Flip Cards" Style="{StaticResource AppBarButtonStyle}"/>
+                    <Button Content="" x:Name="FlipCardbtn" HorizontalAlignment="Left" AutomationProperties.Name="Flip Cards" Style="{StaticResource AppBarButtonStyle}" IsEnabled="false" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="EditCardBtn" Content="" HorizontalAlignment="Right" AutomationProperties.Name="Edit Card" Style="{StaticResource AppBarButtonStyle}" />
+                    <Button x:Name="EditCardBtn" Content="" HorizontalAlignment="Right" AutomationProperties.Name="Edit Card" Style="{StaticResource AppBarButtonStyle}" IsEnabled="false" />
                 </StackPanel>
             </Grid>
         </AppBar>

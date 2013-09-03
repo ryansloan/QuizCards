@@ -82,7 +82,7 @@ namespace QuizCards
             progressRing.IsActive = false;
             this.currentDeck = dpp.deck;
             this.DataContext = this.currentDeck;
-            //CardsGridView.DataContext = this.currentDeck;
+            //CardsGridView.DataContext = this.currentDeck;       
         }
 
         private void GridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
