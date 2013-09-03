@@ -109,6 +109,9 @@
     <Compile Include="Card.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="DeckPackageProcessor.cs" />
+    <Compile Include="DeckSummaryPage.xaml.cs">
+      <DependentUpon>DeckSummaryPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LandingPage.xaml.cs">
       <DependentUpon>LandingPage.xaml</DependentUpon>
     </Compile>
@@ -142,6 +145,10 @@
     <Page Include="Common\StandardStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DeckSummaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LandingPage.xaml">
       <SubType>Designer</SubType>

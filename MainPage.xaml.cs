@@ -40,12 +40,22 @@ namespace QuizCards
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {            
-            //e.Parameter should contain file.
+            //e.Parameter should contain deck info, either StorageFile or Deck object
             if (e.Parameter != null)
             {
-                progring.IsEnabled = true;
-                progring.IsActive = true;
-                loadData(e.Parameter as StorageFile);
+                Dictionary<String, Object> p = e.Parameter as Dictionary<String, Object>;
+                if (p.ContainsKey("DeckFile"))
+                {
+                    loadData(p["DeckFile"] as StorageFile);
+                }
+                else if (p.ContainsKey("Deck"))
+                {
+                    this.currentDeck = p["Deck"] as Deck;
+                    this.currentDeck.shuffle();
+                    this.DataContext = this.currentDeck;
+                    CardStackPanel.DataContext = this.currentDeck.getNextCard();
+                    this.updateVisibleCard();
+                }
 
             }
         }
@@ -72,13 +82,7 @@ namespace QuizCards
             CardStackPanel.DataContext = this.currentDeck.getNextCard();
             this.updateVisibleCard();
         }
-        private void clearUI()
-        {
-            SideBLabel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            PrevCardBtn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            NextCardBtn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            
-        }
+
         private void updateVisibleCard()
         {
             SideBLabel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
@@ -152,8 +156,10 @@ namespace QuizCards
 
         private void BackBtn_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ((Deck)this.DataContext).disposeOfBitmaps();
-            this.Frame.GoBack();
+            //Using Navigate rather than GoBack so we can retain the current deck in memory
+            Dictionary<String, Object> p = new Dictionary<string, Object>();
+            p.Add("Deck",this.currentDeck);
+            this.Frame.Navigate(typeof(DeckSummaryPage), p); 
         }
 
     }
