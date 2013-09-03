@@ -8,8 +8,16 @@
     mc:Ignorable="d">
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-            <TextBlock x:Name="AppTitle" HorizontalAlignment="Left" Margin="120,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="72" Text="QuizCards"/>
-        <Button Margin="638,104,0,640" Content="Open Deck" x:Name="DeckLoadBtn" Tapped="DeckLoadBtn_Tapped">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="AppTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="72" Text="QuizCards"/>
+        <Button Content="Open Deck" x:Name="DeckLoadBtn" Tapped="DeckLoadBtn_Tapped" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Margin="0,0,80,0">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <StackPanel Orientation="Horizontal">

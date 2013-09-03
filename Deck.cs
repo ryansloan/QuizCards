@@ -162,6 +162,10 @@ namespace QuizCards
         {
             return this.cards.Count;
         }
+        public int getPosition()
+        {
+            return this.index + 1;
+        }
         public ObservableCollection<Card> getCards()
         {
 

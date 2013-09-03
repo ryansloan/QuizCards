@@ -17,9 +17,10 @@
             <TextBlock x:Name="SideALabel" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="80" RenderTransformOrigin="0.5,0.5" Width="Auto" FontFamily="Segoe UI Light" FontSize="36" Foreground="#FF444444" TextAlignment="Center" Text="{Binding sideALabel}"/>
             <TextBlock x:Name="SideBLabel"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="124" RenderTransformOrigin="0.5,0.5" Width="Auto"  FontFamily="Segoe UI Light" FontSize="36" Foreground="#FF444444" TextAlignment="Center" Text="{Binding sideBLabel}"/>
         </StackPanel>
+        <TextBlock x:Name="ProgressTextBlock"  HorizontalAlignment="Center" Height="Auto" Width="420"  FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="28" Foreground="#ffffff" TextAlignment="Center" Text="" Margin="456,550,456,94"/>
         <ProgressRing x:Name="progring" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button x:Name="NextCardBtn" Content="Next" HorizontalAlignment="Right" Height="58" Margin="0,315,59,0" VerticalAlignment="Top" Width="249" RenderTransformOrigin="0.027,0.636" Click="NextCardBtn_Click" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="36"/>
         <Button x:Name="PrevCardBtn" Content="Previous" HorizontalAlignment="Left" Height="58" Margin="73,315,0,0" VerticalAlignment="Top" Width="233" Click="PrevCardBtn_Click" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="36"/>
-        
+
     </Grid>
 </Page>

@@ -86,6 +86,7 @@ namespace QuizCards
         private void updateVisibleCard()
         {
             SideBLabel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            ProgressTextBlock.Text = "Card " + this.currentDeck.getPosition() + " of " + this.currentDeck.getLength();
             if (this.currentDeck.isNextCard()) { this.NextCardBtn.IsEnabled=true; }
             else { this.NextCardBtn.IsEnabled=false; }
             if (this.currentDeck.isPreviousCard()) { this.PrevCardBtn.IsEnabled = true; }
