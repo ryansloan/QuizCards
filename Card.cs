@@ -20,7 +20,7 @@ namespace QuizCards
             }
             set
             {
-                if (value == this._sideBLabel)
+                if (value == this._sideALabel)
                 {
                     return;
                 }

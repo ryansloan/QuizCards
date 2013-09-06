@@ -76,12 +76,20 @@ namespace QuizCards
             DeckPackageProcessor dpp = new DeckPackageProcessor();
             progressRing.IsEnabled = true;
             progressRing.IsActive = true;
-            await dpp.readPackageAsync(file);
-            //Once we're done, kill progress, set up controls, and update the display
-            progressRing.IsEnabled = false;
-            progressRing.IsActive = false;
-            this.currentDeck = dpp.deck;
-            this.DataContext = this.currentDeck;
+            if (await dpp.readPackageAsync(file))
+            {
+                //Once we're done, kill progress, set up controls, and update the display
+                progressRing.IsEnabled = false;
+                progressRing.IsActive = false;
+                this.currentDeck = dpp.deck;
+                this.DataContext = this.currentDeck;
+            }
+            else
+            {
+                Windows.UI.Popups.MessageDialog errorDialog = new Windows.UI.Popups.MessageDialog("There was a problem loading the file you selected. Make sure you've selected a valid QuizCards deck.", "Uh oh! I couldn't load that file.");
+                await errorDialog.ShowAsync();
+                Frame.Navigate(typeof(LandingPage));
+            }
             //CardsGridView.DataContext = this.currentDeck;       
         }
 

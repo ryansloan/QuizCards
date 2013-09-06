@@ -16,6 +16,7 @@ namespace QuizCards
         public String packagePath;
         public Deck deck;
         private String deckXml;
+        private bool deckDescriptionFound = false;
         public DeckPackageProcessor()
         {
             this.deck = new Deck();
@@ -28,6 +29,8 @@ namespace QuizCards
         }
         public async Task<bool> readPackageAsync(StorageFile file)
         {
+            this.deckDescriptionFound = false;
+            bool result = false;
             //Locate Archive based on this.packagePath
             var folder = ApplicationData.Current.TemporaryFolder;
             //Open Archive
@@ -39,15 +42,24 @@ namespace QuizCards
                     if (en.FullName.Contains("deckdescription.xml"))
                     {
                         char[] output = new char[en.Length];
-
+                        this.deckDescriptionFound = true;
+                        //Open deckdescription.xml and save it into deckXml
                         using (StreamReader sr = new StreamReader(en.Open()))
                         {
-                            //Open deckdescription.xml and save it into deckXml
                             await sr.ReadAsync(output, 0, (int)en.Length);
-                            this.deckXml = new String(output);
+                            //There was some weirdness here, which I'm documenting for the sake of my Memento-esque memory.
+                            //We were hitting all kinds of weird XMLExceptions at the end of certain files (XMLExceptions around the Null character 0x00).
+                            //The UTF-8 files effected always involved some characters that required two bytes. We'd hit this exception after the closing tag ("</deck>")
+                            //When I inspected these files in a Hex editor, there were never any null characters at the end of the file, which was weird.
+                            //My hypothesis was that when we built the output char array using en.Length, that length was returning the length in Bytes, which 
+                            //was not the same as the number of characters (since some required 2 bytes). The result was that the output array was longer
+                            //than the string that it was representing, and those extra slots were NULL (excess length was a function of the number of characters 
+                            //requiring 2 bytes). Thus, I am trimming the null chars off the end.
+                            //tl;dr: ZipArchiveEntry.Length doesn't actually return the number of characters in the file. This seems obvious in retrospect. 
+                            this.deckXml = new String(output).TrimEnd('\0');
                         }
                     }
-                    else if (en.FullName.EndsWith(".jpg") || en.FullName.EndsWith(".jpeg") || en.FullName.EndsWith(".png"))
+                    if (en.FullName.EndsWith(".jpg") || en.FullName.EndsWith(".jpeg") || en.FullName.EndsWith(".png"))
                     {
                         //Copy Images to LocalStorage - Tmp Folder
                         using (Stream picdata = en.Open())
@@ -64,7 +76,22 @@ namespace QuizCards
                 }
             }
             //kick off processXml, return result of that.
-            return processXml();
+            if (this.deckDescriptionFound)
+            {
+                try
+                {
+                    result = processXml();
+                }
+                catch (XmlException e)
+                {
+                    result = false;
+                }
+            }
+            else
+            {
+                result = false;
+            }
+            return result;
         }
 
         public bool processXml()
@@ -90,7 +117,7 @@ namespace QuizCards
                                 }
                                 else
                                 {
-                                    Debug.WriteLine("ERROR: improperly structured deck description.");
+                                    return false;
                                 }
                             }
                             else
@@ -116,10 +143,11 @@ namespace QuizCards
                                 }
                                 else if (reader.Name.Equals("cards"))
                                 {
-                                    Debug.WriteLine("entering cards...");
+                                    tabDepth++;
                                 }
                                 else if (reader.Name.Equals("card"))
                                 {
+                                    tabDepth++;
                                     currentCard = new Card();
                                 }
                                 else if (reader.Name.Equals("sidealabel"))
@@ -145,7 +173,10 @@ namespace QuizCards
                         case XmlNodeType.XmlDeclaration:
                             break;
                         case XmlNodeType.EndElement:
-                            tabDepth--;
+                            if (reader.Name.Equals("card") || reader.Name.Equals("cards") || reader.Name.Equals("deck"))
+                            {
+                                tabDepth--;
+                            }
                             if (reader.Name.Equals("card"))
                             {
                                 //Card info is ready, add to deck!
@@ -157,7 +188,7 @@ namespace QuizCards
 
                 Debug.WriteLine("Deck '" + this.deck.getTitle() + "' has " + this.deck.getLength() + " cards.");
             }
-            return false;
+            return true;
         }
 
         public async Task<bool> writePackageAsync(StorageFile file, Deck outDeck)

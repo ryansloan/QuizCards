@@ -34,9 +34,12 @@ namespace QuizCards
             FileOpenPicker picker = new FileOpenPicker();
             picker.FileTypeFilter.Add(".zip");
             StorageFile file = await picker.PickSingleFileAsync();
-            Dictionary<String, Object> p = new Dictionary<String, Object>();
-            p.Add("DeckFile", file);
-            this.Frame.Navigate(typeof(DeckSummaryPage), p);
+            if (file != null)
+            {
+                Dictionary<String, Object> p = new Dictionary<String, Object>();
+                p.Add("DeckFile", file);
+                this.Frame.Navigate(typeof(DeckSummaryPage), p);
+            }
             //this.Frame.Navigate(typeof(MainPage), file);
 
         }
