@@ -26,7 +26,7 @@ namespace QuizCards
     {
 
         private Deck currentDeck;
-
+        private String frontSide = "A";
         public DeckSummaryPage()
         {
             this.InitializeComponent();
@@ -83,6 +83,7 @@ namespace QuizCards
                 progressRing.IsActive = false;
                 this.currentDeck = dpp.deck;
                 this.DataContext = this.currentDeck;
+                CardsGridView.ItemTemplate = ShowSideATemplate;
             }
             else
             {
@@ -103,6 +104,20 @@ namespace QuizCards
             Dictionary<String, Object> p = new Dictionary<String, Object>();
             p.Add("Deck", this.currentDeck);
             this.Frame.Navigate(typeof(MainPage), p);
+        }
+
+        private void FlipCardbtn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (this.frontSide == "B")
+            {
+                CardsGridView.ItemTemplate = ShowSideATemplate;
+                this.frontSide = "A";
+            }
+            else
+            {
+                CardsGridView.ItemTemplate = ShowSideBTemplate;
+                this.frontSide = "B";
+            }
         }
     }
 }
