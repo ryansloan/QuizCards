@@ -11,7 +11,7 @@
             <Grid Background="White" Width="400" Height="200">
                 <StackPanel Orientation="Vertical">
                     <Image Source="{Binding image}" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="100" MaxWidth="200"/>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding   sideALabel}" TextWrapping="WrapWholeWords" FontSize="24" Foreground="#333333"/>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding   sideALabel}" TextWrapping="Wrap" FontSize="24" Foreground="#333333"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -19,7 +19,7 @@
             <Grid Background="White" Width="400" Height="200">
                 <StackPanel Orientation="Vertical">
                     <Image Source="{Binding image}" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="100" MaxWidth="200"/>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding   sideBLabel}" TextWrapping="WrapWholeWords" FontSize="24" Foreground="#333333"/>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding   sideBLabel}" TextWrapping="Wrap" FontSize="24" Foreground="#333333"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>
