@@ -83,7 +83,7 @@ namespace QuizCards
                 progressRing.IsActive = false;
                 this.currentDeck = dpp.deck;
                 this.DataContext = this.currentDeck;
-                CardsGridView.ItemTemplate = ShowSideATemplate;
+                CardsGridView.ItemTemplate = SideATemplate;
             }
             else
             {
@@ -110,12 +110,12 @@ namespace QuizCards
         {
             if (this.frontSide == "B")
             {
-                CardsGridView.ItemTemplate = ShowSideATemplate;
+                CardsGridView.ItemTemplate = SideATemplate;
                 this.frontSide = "A";
             }
             else
             {
-                CardsGridView.ItemTemplate = ShowSideBTemplate;
+                CardsGridView.ItemTemplate = SideBTemplate;
                 this.frontSide = "B";
             }
         }
