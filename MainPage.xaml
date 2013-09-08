@@ -20,17 +20,17 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Height="Auto" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
             <Button x:Name="BackBtn" Content="Back" HorizontalAlignment="Left" VerticalAlignment="Center" Tapped="BackBtn_Tapped" Style="{StaticResource BackButtonStyle}"/>
-            <TextBlock x:Name="DeckTitleBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="72" Text="{Binding title}"/>
+            <TextBlock x:Name="DeckTitleBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Light" FontSize="72" Text="{Binding title}"/>
         </StackPanel>
         <StackPanel x:Name="CardStackPanel" Background="White" HorizontalAlignment="Center" Height="390" VerticalAlignment="Top" Width="624" Tapped="Card_Tapped" Grid.Row="1" Grid.Column="1">
             <Image x:Name="SideAImage" HorizontalAlignment="Center" Height="180" VerticalAlignment="Top" Width="200" RenderTransformOrigin="-0.06,-0.2" Source="{Binding image}"/>
             <TextBlock x:Name="SideALabel" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="80" RenderTransformOrigin="0.5,0.5" Width="Auto" FontFamily="Segoe UI Light" FontSize="36" Foreground="#FF444444" TextAlignment="Center" Text="{Binding sideALabel}"/>
             <TextBlock x:Name="SideBLabel"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="124" RenderTransformOrigin="0.5,0.5" Width="Auto"  FontFamily="Segoe UI Light" FontSize="36" Foreground="#FF444444" TextAlignment="Center" Text="{Binding sideBLabel}"/>
         </StackPanel>
-        <TextBlock x:Name="ProgressTextBlock"  HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="Auto"  FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="28" Foreground="#ffffff" TextAlignment="Center" Text="" Grid.Row="2" Grid.Column="1"/>
+        <TextBlock x:Name="ProgressTextBlock"  HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="Auto"  FontFamily="Segoe UI" FontWeight="Light" FontSize="28" Foreground="#ffffff" TextAlignment="Center" Text="" Grid.Row="2" Grid.Column="1"/>
         <ProgressRing x:Name="progring" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="3" Grid.ColumnSpan="3" />
-        <Button x:Name="NextCardBtn" Content="Next" HorizontalAlignment="Left" Height="58" VerticalAlignment="Center" Width="249" Click="NextCardBtn_Click" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="36" Grid.Row="1" Grid.Column="2"/>
-        <Button x:Name="PrevCardBtn" Content="Previous" HorizontalAlignment="Right" Height="58" VerticalAlignment="Center" Width="233" Click="PrevCardBtn_Click" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="36" Grid.Row="1" Grid.Column="0"/>
+        <Button x:Name="NextCardBtn" Content="Next" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Width="249" Click="NextCardBtn_Click" FontFamily="Segoe UI" FontSize="32" Grid.Row="1" Grid.Column="2"/>
+        <Button x:Name="PrevCardBtn" Content="Previous" HorizontalAlignment="Right" Height="Auto" VerticalAlignment="Center" Width="233" Click="PrevCardBtn_Click" FontFamily="Segoe UI" FontSize="32" Grid.Row="1" Grid.Column="0"/>
 
     </Grid>
 </Page>

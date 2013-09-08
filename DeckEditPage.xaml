@@ -8,7 +8,7 @@
     mc:Ignorable="d">
     <Page.Resources>
         <Style TargetType="TextBlock" x:Key="LabelStyle">
-            <Setter Property="FontFamily" Value="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
             <Setter Property="FontSize" Value="18" />
         </Style>
         <Style TargetType="TextBox" x:Key="TextBoxStyle">
@@ -27,7 +27,7 @@
             </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Grid.ColumnSpan="2">
             <Button x:Name="BackBtn" Content="Back" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource BackButtonStyle}" Tapped="BackBtn_Tapped"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="72" Text="Deck Information"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Light" FontSize="72" Text="Deck Information"/>
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>

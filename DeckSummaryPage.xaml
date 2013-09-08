@@ -10,13 +10,13 @@
         <ControlTemplate x:Key="AddButtonTemplate" TargetType="Button">
             <StackPanel Orientation="Horizontal">
                 <TextBlock x:Name="AddItemPlus" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
-                <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
+                <TextBlock FontFamily="Segoe UI" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
             </StackPanel>
         </ControlTemplate>
         <ControlTemplate x:Key="SaveButtonTemplate" TargetType="Button">
             <StackPanel Orientation="Horizontal">
                 <TextBlock x:Name="SaveIcon" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
-                <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
+                <TextBlock FontFamily="Segoe UI" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
             </StackPanel>
         </ControlTemplate>
         <DataTemplate x:Key="SideATemplate" x:Name="SideATemplate">
@@ -50,7 +50,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
             <Button x:Name="BackBtn" Content="Back" HorizontalAlignment="Left" VerticalAlignment="Center" Tapped="BackBtn_Tapped" Style="{StaticResource BackButtonStyle}"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="72" Text="{Binding title}"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Segoe UI" FontWeight="Light" FontSize="72" Text="{Binding title}"/>
             <Button x:Name="EditDeckBtn" VerticalAlignment="Center" Margin="40 0 0 0" Template="{StaticResource EditButtonTemplate}" Tapped="EditDeckBtn_Tapped" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0">
@@ -61,7 +61,7 @@
                     <ControlTemplate TargetType="Button">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock x:Name="QuizCheckmarks" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
-                            <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
+                            <TextBlock FontFamily="Segoe UI" Margin="4 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
                         </StackPanel>
                     </ControlTemplate>
                 </Button.Template>

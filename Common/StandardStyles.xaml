@@ -28,8 +28,9 @@
 
     <x:String x:Key="ChevronGlyph">&#xE26B;</x:String>
     <Color x:Key="ChalkBoardGreen">#497959</Color>
+    <Color x:Key="GrayBackground">#444444</Color>
     
-    <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="{StaticResource ChalkBoardGreen}" />
+    <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="{StaticResource GrayBackground}" />
     <!-- RichTextBlock styles -->
 
     <Style x:Key="BasicRichTextStyle" TargetType="RichTextBlock">

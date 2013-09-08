@@ -9,14 +9,14 @@
     <Page.Resources>
         <ControlTemplate x:Key="OpenButtonTemplate" TargetType="Button">
             <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="OpenDeckFolder" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
-                <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
+                <TextBlock x:Name="OpenDeckFolder" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="22" />
+                <TextBlock FontFamily="Segoe UI" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
             </StackPanel>
         </ControlTemplate>
         <ControlTemplate x:Key="AddButtonTemplate" TargetType="Button">
             <StackPanel Orientation="Horizontal">
                 <TextBlock x:Name="AddItemPlus" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
-                <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
+                <TextBlock FontFamily="Segoe UIt" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
             </StackPanel>
         </ControlTemplate>
     </Page.Resources>
@@ -29,10 +29,10 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="AppTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="72" Text="QuizCards" Grid.Row="0" Grid.Column="0" />
+        <TextBlock x:Name="AppTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Segoe UI" FontWeight="Light" FontSize="72" Text="QuizCards" Grid.Row="0" Grid.Column="0" />
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
-            <Button Content="Open Deck" x:Name="DeckLoadBtn" Tapped="DeckLoadBtn_Tapped" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Margin="0,0,80,0" Template="{StaticResource OpenButtonTemplate}" />
-            <Button Content="New Deck" x:Name="CreateDeckBtn" Tapped="CreateDeckBtn_Tapped" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Margin="0,0,80,0" Template="{StaticResource AddButtonTemplate}" />
+            <Button Content="Open Deck" x:Name="DeckLoadBtn" Tapped="DeckLoadBtn_Tapped" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Margin="0,0,80,0" Template="{StaticResource OpenButtonTemplate}" />
+            <Button Content="New Deck" x:Name="CreateDeckBtn" Tapped="CreateDeckBtn_Tapped" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Margin="0,0,80,0" Template="{StaticResource AddButtonTemplate}" />
         </StackPanel>
     </Grid>
 </Page>
