@@ -36,11 +36,11 @@
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Vertical" Grid.Column="0" Margin="20 0 0 0">
             <TextBlock x:Name="TitleLabel" Text="Deck Name" Style="{StaticResource LabelStyle}" />
-            <TextBox x:Name="TitleTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding title}"/>
+                <TextBox x:Name="TitleTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding title, Mode=TwoWay}"/>
             <TextBlock x:Name="SideANameLabel" Text="Front Label" Style="{StaticResource LabelStyle}" />
-            <TextBox x:Name="SideANameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding sideAName}"/>
+                <TextBox x:Name="SideANameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding sideAName, Mode=TwoWay}"/>
             <TextBlock x:Name="SideBNameLabel" Text="Back Label" Style="{StaticResource LabelStyle}" />
-            <TextBox x:Name="SideBNameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding sideBName}" />
+                <TextBox x:Name="SideBNameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding sideBName, Mode=TwoWay}" />
         </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" >

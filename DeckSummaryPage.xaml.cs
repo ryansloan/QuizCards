@@ -26,7 +26,7 @@ namespace QuizCards
     {
 
         private Deck currentDeck;
-        private String frontSide = "A";
+        private String frontSide = "A"; Card c;
         public DeckSummaryPage()
         {
             this.InitializeComponent();
@@ -39,6 +39,7 @@ namespace QuizCards
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            CardsGridView.ItemTemplate = SideATemplate;
             if (e.Parameter != null)
             {
                 Dictionary<String, Object> p = e.Parameter as Dictionary<String, Object>;
@@ -51,6 +52,11 @@ namespace QuizCards
                     this.currentDeck = p["Deck"] as Deck;
                     this.DataContext = this.currentDeck;
                 }
+                if (p.ContainsKey("Card"))
+                {
+                    c = p["Card"] as Card;
+                    CardsGridView.Loaded += scrollToSelected;
+                }
 
             }
             else
@@ -61,10 +67,14 @@ namespace QuizCards
                 this.currentDeck.sideBName = "Side B";
                 this.DataContext = this.currentDeck;
             }
-            CardsGridView.ItemTemplate = SideATemplate;
+
 
         }
-
+        private void scrollToSelected(object sender, RoutedEventArgs args)
+        {
+            CardsGridView.SelectedItem = this.c;
+            CardsGridView.ScrollIntoView(CardsGridView.SelectedItem,ScrollIntoViewAlignment.Leading);
+        }
         private void BackBtn_Tapped(object sender, RoutedEventArgs e)
         {
             //Viewing a deck->Quizzing->View blows up backstack, so use Navigate instead.
@@ -98,6 +108,14 @@ namespace QuizCards
         private void GridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SummaryAppBar.IsOpen = true;
+            if (CardsGridView.SelectedItem != null)
+            {
+                EditCardBtn.IsEnabled = true;
+            }
+            else
+            {
+                EditCardBtn.IsEnabled = false;
+            }
         }
 
         private void StartQuizBtn_Tapped(object sender, TappedRoutedEventArgs e)
@@ -130,7 +148,17 @@ namespace QuizCards
 
         private void AddCardBtn_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Dictionary<String, Object> p = new Dictionary<String, Object>();
+            p.Add("Deck", this.currentDeck);
+            this.Frame.Navigate(typeof(CardEditPage), p);
+        }
 
+        private void EditCardBtn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Dictionary<String, Object> p = new Dictionary<String, Object>();
+            p.Add("Deck", this.currentDeck);
+            p.Add("Card", CardsGridView.SelectedItem as Card);
+            this.Frame.Navigate(typeof(CardEditPage), p);
         }
     }
 }

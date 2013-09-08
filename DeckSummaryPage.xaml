@@ -71,7 +71,7 @@
                     <Button Content="" x:Name="FlipCardbtn" HorizontalAlignment="Left" AutomationProperties.Name="Flip Cards" Style="{StaticResource AppBarButtonStyle}" Tapped="FlipCardbtn_Tapped" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="EditCardBtn" Content="" HorizontalAlignment="Right" AutomationProperties.Name="Edit Card" Style="{StaticResource AppBarButtonStyle}" IsEnabled="false" />
+                    <Button x:Name="EditCardBtn" Content="" HorizontalAlignment="Right" AutomationProperties.Name="Edit Card" Style="{StaticResource AppBarButtonStyle}" IsEnabled="false" Tapped="EditCardBtn_Tapped" />
                 </StackPanel>
             </Grid>
         </AppBar>
