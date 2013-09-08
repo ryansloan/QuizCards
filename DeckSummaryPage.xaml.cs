@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,7 +27,7 @@ namespace QuizCards
     {
 
         private Deck currentDeck;
-        private String frontSide = "A"; Card c;
+        private String frontSide = "A";
         public DeckSummaryPage()
         {
             this.InitializeComponent();
@@ -54,7 +55,7 @@ namespace QuizCards
                 }
                 if (p.ContainsKey("Card"))
                 {
-                    c = p["Card"] as Card;
+                    CardsGridView.SelectedItem = p["Card"] as Card;
                     CardsGridView.Loaded += scrollToSelected;
                 }
 
@@ -72,7 +73,6 @@ namespace QuizCards
         }
         private void scrollToSelected(object sender, RoutedEventArgs args)
         {
-            CardsGridView.SelectedItem = this.c;
             CardsGridView.ScrollIntoView(CardsGridView.SelectedItem,ScrollIntoViewAlignment.Leading);
         }
         private void BackBtn_Tapped(object sender, RoutedEventArgs e)
@@ -159,6 +159,23 @@ namespace QuizCards
             p.Add("Deck", this.currentDeck);
             p.Add("Card", CardsGridView.SelectedItem as Card);
             this.Frame.Navigate(typeof(CardEditPage), p);
+        }
+
+        private void SaveDeckBtn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            SaveDeck();
+
+        }
+        private async void SaveDeck()
+        {
+            FileSavePicker picker = new FileSavePicker();
+            picker.FileTypeChoices.Add("QuizCard Deck", new string[] { ".zip" });
+            StorageFile file = await picker.PickSaveFileAsync();
+            if (file != null)
+            {
+                DeckPackageProcessor dpp = new DeckPackageProcessor();
+                await dpp.writePackageAsync(file, this.currentDeck);
+            }
         }
     }
 }

@@ -13,6 +13,12 @@
                 <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
             </StackPanel>
         </ControlTemplate>
+        <ControlTemplate x:Key="SaveButtonTemplate" TargetType="Button">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="SaveIcon" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
+                <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
+            </StackPanel>
+        </ControlTemplate>
         <DataTemplate x:Key="SideATemplate" x:Name="SideATemplate">
             <Grid Background="White" Width="400" Height="200">
                 <StackPanel Orientation="Vertical">
@@ -48,17 +54,18 @@
             <Button x:Name="EditDeckBtn" VerticalAlignment="Center" Margin="40 0 0 0" Template="{StaticResource EditButtonTemplate}" Tapped="EditDeckBtn_Tapped" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0">
+            <Button Content="Save Deck" x:Name="SaveDeckBtn" Tapped="SaveDeckBtn_Tapped" Template="{StaticResource SaveButtonTemplate}" Margin="0,0,80,0" />
             <Button Content="Add Card" x:Name="AddCardBtnIC" Tapped="AddCardBtn_Tapped" Template="{StaticResource AddButtonTemplate}" Margin="0,0,80,0"/>
-        <Button Content="Quiz Me!" x:Name="StartQuizBtn" Tapped="StartQuizBtn_Tapped" Grid.Row="0" Grid.Column="1" Margin="0,0,80,0">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="QuizCheckmarks" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
-                        <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
-                    </StackPanel>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
+            <Button Content="Quiz Me!" x:Name="StartQuizBtn" Tapped="StartQuizBtn_Tapped" Grid.Row="0" Grid.Column="1" Margin="0,0,80,0">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="QuizCheckmarks" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
+                            <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
        </StackPanel>
         <GridView x:Name="CardsGridView" HorizontalAlignment="Left" Background="{StaticResource ApplicationPageBackgroundThemeBrush}" VerticalAlignment="Top" Width="Auto" ItemsSource="{Binding cards}" Foreground="#FF262626" SelectionChanged="GridView_SelectionChanged" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="0">
         </GridView>

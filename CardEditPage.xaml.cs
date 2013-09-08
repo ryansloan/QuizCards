@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -92,6 +94,32 @@ namespace QuizCards
             }
             p.Add("Deck", this.currentDeck);
             this.Frame.Navigate(typeof(DeckSummaryPage),p);
+        }
+
+        private void InsertImageFromFileSideA_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PickAndCopyImage("A");
+        }
+        private async void PickAndCopyImage(string side)
+        {
+            var tmpFolder = ApplicationData.Current.TemporaryFolder;
+            FileOpenPicker picker = new FileOpenPicker();
+            picker.FileTypeFilter.Add(".png");
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            StorageFile inFile = await picker.PickSingleFileAsync();
+            //copy to local tmp directory
+            using (Stream s = await inFile.OpenStreamForReadAsync())
+            {
+                StorageFile outfile = await tmpFolder.CreateFileAsync(inFile.Name, CreationCollisionOption.ReplaceExisting);
+                using (Stream sout = await outfile.OpenStreamForWriteAsync())
+                {
+                    await s.CopyToAsync(sout);
+                    await sout.FlushAsync();
+                }
+            }
+            this.currentCard.setImage("ms-appdata:///temp/" + inFile.Name);
+            SideAImage.Source = this.currentCard.image;
         }
     }
 }
