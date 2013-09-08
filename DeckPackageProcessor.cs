@@ -125,21 +125,21 @@ namespace QuizCards
                                 tabDepth++;
                                 if (reader.Name.Equals("title"))
                                 {
-                                    this.deck.setTitle(reader.ReadElementContentAsString());
+                                    this.deck.setTitle(System.Net.WebUtility.HtmlDecode(reader.ReadElementContentAsString()));
                                     Debug.WriteLine("Set deck title to " + this.deck.getTitle());
                                 }
                                 else if (reader.Name.Equals("description"))
                                 {
                                     //SET DESCRIPTION!
-                                    Debug.WriteLine("Deck Description: " + reader.ReadElementContentAsString());
+                                    Debug.WriteLine("Deck Description: " + System.Net.WebUtility.HtmlDecode(reader.ReadElementContentAsString()));
                                 }
                                 else if (reader.Name.Equals("sideaname"))
                                 {
-                                    this.deck.setSideAName(reader.ReadElementContentAsString());
+                                    this.deck.setSideAName(System.Net.WebUtility.HtmlDecode(reader.ReadElementContentAsString()));
                                 }
                                 else if (reader.Name.Equals("sidebname"))
                                 {
-                                    this.deck.setSideBName(reader.ReadElementContentAsString());
+                                    this.deck.setSideBName(System.Net.WebUtility.HtmlDecode(reader.ReadElementContentAsString()));
                                 }
                                 else if (reader.Name.Equals("cards"))
                                 {
@@ -152,16 +152,16 @@ namespace QuizCards
                                 }
                                 else if (reader.Name.Equals("sidealabel"))
                                 {
-                                    currentCard.sideALabel = reader.ReadElementContentAsString();
+                                    currentCard.sideALabel = System.Net.WebUtility.HtmlDecode(reader.ReadElementContentAsString());
                                     Debug.WriteLine("Reading card labeled " + currentCard.sideALabel);
                                 }
                                 else if (reader.Name.Equals("sideblabel"))
                                 {
-                                    currentCard.sideBLabel = reader.ReadElementContentAsString();
+                                    currentCard.sideBLabel = System.Net.WebUtility.HtmlDecode(reader.ReadElementContentAsString());
                                 }
                                 else if (reader.Name.Equals("sideaimage"))
                                 {
-                                    currentCard.setImage("ms-appdata:///temp/" + reader.ReadElementContentAsString());
+                                    currentCard.setImage("ms-appdata:///temp/" + System.Net.WebUtility.HtmlDecode(reader.ReadElementContentAsString()));
                                 }
 
                             }
@@ -252,27 +252,27 @@ namespace QuizCards
                 s.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
                 s.AppendLine("<deck>");
                 s.Append("<title>");
-                s.Append(this.deck.title);
+                s.Append(System.Net.WebUtility.HtmlEncode(this.deck.title));
                 s.AppendLine("</title>");
                 s.Append("<description>");
                 s.Append("");
                 s.AppendLine("</description>");
                 s.Append("<sideaname>");
-                s.Append(this.deck.sideAName);
+                s.Append(System.Net.WebUtility.HtmlEncode(this.deck.sideAName));
                 s.AppendLine("</sideaname>");
                 s.Append("<sidebname>");
-                s.Append(this.deck.sideBName);
+                s.Append(System.Net.WebUtility.HtmlEncode(this.deck.sideBName));
                 s.AppendLine("</sidebname>");
                 s.AppendLine("<cards>");
                 foreach (Card c in this.deck.cards)
                 {
                     s.AppendLine("<card>");
-                    s.AppendLine("<sidealabel>" + c.sideALabel + "</sidealabel>");
-                    s.AppendLine("<sideblabel>" + c.sideBLabel + "</sideblabel>");
+                    s.AppendLine("<sidealabel>" + System.Net.WebUtility.HtmlEncode(c.sideALabel) + "</sidealabel>");
+                    s.AppendLine("<sideblabel>" + System.Net.WebUtility.HtmlEncode(c.sideBLabel) + "</sideblabel>");
                     if (c.hasImage())
                     {
                         segments = c.image.UriSource.Segments;
-                        s.AppendLine("<sideaimage>"+ segments[segments.Count()-1] +"</sideaimage>");
+                        s.AppendLine("<sideaimage>"+ System.Net.WebUtility.HtmlEncode(segments[segments.Count()-1]) +"</sideaimage>");
                     }
                     s.AppendLine("</card>");
                 }
