@@ -6,8 +6,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <ControlTemplate x:Key="OpenButtonTemplate" TargetType="Button">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="OpenDeckFolder" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
+                <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
+            </StackPanel>
+        </ControlTemplate>
+        <ControlTemplate x:Key="AddButtonTemplate" TargetType="Button">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="AddItemPlus" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
+                <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
+            </StackPanel>
+        </ControlTemplate>
+    </Page.Resources>
+        <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
             <RowDefinition/>
@@ -16,16 +29,10 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="AppTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="72" Text="QuizCards"/>
-        <Button Content="Open Deck" x:Name="DeckLoadBtn" Tapped="DeckLoadBtn_Tapped" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Margin="0,0,80,0">
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="OpenDeckPlus" HorizontalAlignment="Left"  VerticalAlignment="Center" FontFamily="Segoe UI Symbol" Text="" FontSize="24" />
-                        <TextBlock FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" Margin="4 0 0 0" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="24" Text="{TemplateBinding Content}" />
-                    </StackPanel>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
+        <TextBlock x:Name="AppTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="72" Text="QuizCards" Grid.Row="0" Grid.Column="0" />
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
+            <Button Content="Open Deck" x:Name="DeckLoadBtn" Tapped="DeckLoadBtn_Tapped" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Margin="0,0,80,0" Template="{StaticResource OpenButtonTemplate}" />
+            <Button Content="New Deck" x:Name="CreateDeckBtn" Tapped="CreateDeckBtn_Tapped" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" Margin="0,0,80,0" Template="{StaticResource AddButtonTemplate}" />
+        </StackPanel>
     </Grid>
 </Page>

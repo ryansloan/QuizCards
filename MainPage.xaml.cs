@@ -95,7 +95,7 @@ namespace QuizCards
 
         private void PrevCardBtn_Click(object sender, RoutedEventArgs e)
         {
-                CardStackPanel.DataContext = this.currentDeck.getNextCard();
+                CardStackPanel.DataContext = this.currentDeck.getPreviousCard();
                 this.updateVisibleCard();
 
         }

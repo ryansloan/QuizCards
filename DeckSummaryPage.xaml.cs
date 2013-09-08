@@ -56,10 +56,12 @@ namespace QuizCards
             else
             {
                 currentDeck = new Deck();
-                this.currentDeck.sideAName = "SideA";
-                this.currentDeck.sideBName = "SideB";
+                this.currentDeck.title = "My Deck Name";
+                this.currentDeck.sideAName = "Side A";
+                this.currentDeck.sideBName = "Side B";
                 this.DataContext = this.currentDeck;
             }
+            CardsGridView.ItemTemplate = SideATemplate;
 
         }
 
@@ -83,7 +85,6 @@ namespace QuizCards
                 progressRing.IsActive = false;
                 this.currentDeck = dpp.deck;
                 this.DataContext = this.currentDeck;
-                CardsGridView.ItemTemplate = SideATemplate;
             }
             else
             {
@@ -118,6 +119,18 @@ namespace QuizCards
                 CardsGridView.ItemTemplate = SideBTemplate;
                 this.frontSide = "B";
             }
+        }
+
+        private void EditDeckBtn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Dictionary<String, Object> p = new Dictionary<String, Object>();
+            p.Add("Deck", this.currentDeck);
+            this.Frame.Navigate(typeof(DeckEditPage), p);
+        }
+
+        private void AddCardBtn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
         }
     }
 }

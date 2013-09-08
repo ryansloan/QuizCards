@@ -40,7 +40,6 @@ namespace QuizCards
                 p.Add("DeckFile", file);
                 this.Frame.Navigate(typeof(DeckSummaryPage), p);
             }
-            //this.Frame.Navigate(typeof(MainPage), file);
 
         }
 
@@ -56,6 +55,11 @@ namespace QuizCards
         private void DeckLoadBtn_Tapped(object sender, TappedRoutedEventArgs e)
         {
             OpenDeckFromFile();
+        }
+
+        private void CreateDeckBtn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(DeckSummaryPage));
         }
     }
 }

@@ -1,0 +1,55 @@
+﻿<Page
+    x:Class="QuizCards.DeckEditPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:QuizCards"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="LabelStyle">
+            <Setter Property="FontFamily" Value="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" />
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+        <Style TargetType="TextBox" x:Key="TextBoxStyle">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+    </Page.Resources>
+        <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Grid.ColumnSpan="2">
+            <Button x:Name="BackBtn" Content="Back" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource BackButtonStyle}" Tapped="BackBtn_Tapped"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Assets/ARCHITECTSDAUGHTER.TTF#Architects Daughter" FontSize="72" Text="Deck Information"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Column="0" Margin="20 0 0 0">
+            <TextBlock x:Name="TitleLabel" Text="Deck Name" Style="{StaticResource LabelStyle}" />
+            <TextBox x:Name="TitleTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding title}"/>
+            <TextBlock x:Name="SideANameLabel" Text="Front Label" Style="{StaticResource LabelStyle}" />
+            <TextBox x:Name="SideANameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding sideAName}"/>
+            <TextBlock x:Name="SideBNameLabel" Text="Back Label" Style="{StaticResource LabelStyle}" />
+            <TextBox x:Name="SideBNameTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding sideBName}" />
+        </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" >
+            <TextBlock Text="Card Preview" Style="{StaticResource LabelStyle}"></TextBlock>
+            <StackPanel x:Name="CardPreviewStackPanel" Background="White" HorizontalAlignment="Center" Height="390" VerticalAlignment="Center" Width="624" >
+                <Rectangle x:Name="ImagePreview" HorizontalAlignment="Center" Height="180" VerticalAlignment="Top" Width="200" RenderTransformOrigin="-0.06,-0.2" Fill="#e1e1e1" />
+                <TextBlock x:Name="SideALabel" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="80" RenderTransformOrigin="0.5,0.5" Width="Auto" FontFamily="Segoe UI Light" FontSize="36" Foreground="#FF444444" TextAlignment="Center" Text="{Binding ElementName=SideANameTextBox, Path=Text}"/>
+                <TextBlock x:Name="SideBLabel"  HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="124" RenderTransformOrigin="0.5,0.5" Width="Auto"  FontFamily="Segoe UI Light" FontSize="36" Foreground="#FF444444" TextAlignment="Center" Text="{Binding ElementName=SideBNameTextBox, Path=Text}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
