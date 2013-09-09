@@ -103,15 +103,19 @@ namespace QuizCards
         private async void PickAndCopyImage(string side)
         {
             var tmpFolder = ApplicationData.Current.TemporaryFolder;
+            string outFileName = Guid.NewGuid().ToString();
             FileOpenPicker picker = new FileOpenPicker();
             picker.FileTypeFilter.Add(".png");
             picker.FileTypeFilter.Add(".jpg");
             picker.FileTypeFilter.Add(".jpeg");
             StorageFile inFile = await picker.PickSingleFileAsync();
             //copy to local tmp directory
+            StorageFile outfile = null;
+
             using (Stream s = await inFile.OpenStreamForReadAsync())
             {
-                StorageFile outfile = await tmpFolder.CreateFileAsync(inFile.Name, CreationCollisionOption.ReplaceExisting);
+                outFileName += inFile.FileType;
+                outfile = await tmpFolder.CreateFileAsync(outFileName, CreationCollisionOption.ReplaceExisting);
                 using (Stream sout = await outfile.OpenStreamForWriteAsync())
                 {
                     await s.CopyToAsync(sout);
@@ -120,12 +124,12 @@ namespace QuizCards
             }
             if (side == "A")
             {
-                this.currentCard.setSideAImage("ms-appdata:///temp/" + inFile.Name);
+                this.currentCard.setSideAImage("ms-appdata:///temp/" + outFileName);
                 SideAImage.Source = this.currentCard.sideAImage;
             }
             else if (side == "B")
             {
-                this.currentCard.setSideBImage("ms-appdata:///temp/" + inFile.Name);
+                this.currentCard.setSideBImage("ms-appdata:///temp/" + outFileName);
                 SideBImage.Source = this.currentCard.sideBImage;
             }
         }
