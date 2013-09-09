@@ -50,12 +50,20 @@ namespace QuizCards
                 }
             }
         }
-        private BitmapImage _image;
-        public BitmapImage image
+        private BitmapImage _sideAImage;
+        public BitmapImage sideAImage
         {
             get
             {
-                return this._image;
+                return this._sideAImage;
+            }
+        }
+        private BitmapImage _sideBImage;
+        public BitmapImage sideBImage
+        {
+            get
+            {
+                return this._sideBImage;
             }
         }
 
@@ -70,42 +78,65 @@ namespace QuizCards
         {
             this.sideALabel = null;
             this.sideBLabel = null;
-            this._image = null;
+            this._sideAImage = null;
+            this._sideBImage = null;
         }
 
         public Card(String sA, String sB)
         {
             this.sideALabel = sA;
             this.sideBLabel = sB;
-            this._image = null;
+            this._sideAImage = null;
+            this._sideBImage = null;
         }
-        public Card(String sA, String sB, BitmapImage i)
+        public Card(String sA, String sB, BitmapImage i1, BitmapImage i2)
         {
             this.sideALabel = sA;
             this.sideBLabel = sB;
-            this._image = i;
+            this._sideAImage = i1;
+            this._sideBImage = i2;
         }
-        public Card(String sA, String sB, String i)
+        public Card(String sA, String sB, String i1, String i2)
         {
             this.sideALabel = sA;
             this.sideBLabel = sB;
-            this._image = new BitmapImage();
-            this._image.UriSource = new Uri(i);
+            this._sideAImage = new BitmapImage();
+            this._sideAImage.UriSource = new Uri(i1);
+            this._sideAImage = new BitmapImage();
+            this._sideAImage.UriSource = new Uri(i2);
 
         }
-        public bool hasImage()
+        public bool hasImages()
         {
-            return this._image != null;
+            return ((this._sideAImage != null) || (this._sideBImage != null));
         }
-        public void setImage(String s)
+        public bool hasSideAImage()
         {
-            this._image = new BitmapImage();
-            this._image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            this._image.UriSource = new Uri(s);
+            return (this._sideAImage != null);
         }
-        public void setImage(BitmapImage bi)
+        public bool hasSideBImage()
         {
-            this._image = bi;
+            return (this._sideBImage != null);
+        }
+        public void setSideAImage(String s)
+        {
+            this._sideAImage = new BitmapImage();
+            this._sideAImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            this._sideAImage.UriSource = new Uri(s);
+        }
+        public void setSideAImage(BitmapImage bi)
+        {
+            this._sideAImage = bi;
+        }
+        public void setSideBImage(String s)
+        {
+            this._sideBImage = new BitmapImage();
+            this._sideBImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            this._sideBImage.UriSource = new Uri(s);
+        }
+        public void setSideBImage(BitmapImage bi)
+        {
+            this._sideBImage = bi;
         }
         public string toString()
         {
@@ -113,10 +144,15 @@ namespace QuizCards
         }
         public void emptyBitmap()
         {
-            if (this._image != null)
+            if (this._sideAImage != null)
             {
-                this._image.UriSource = null;
-                this._image = null;
+                this._sideAImage.UriSource = null;
+                this._sideAImage = null;
+            }
+            if (this._sideBImage != null)
+            {
+                this._sideBImage.UriSource = null;
+                this._sideBImage = null;
             }
         }
     }

@@ -41,7 +41,7 @@
             <TextBlock Text="Content:" Style="{StaticResource LabelStyle}"/>
             <TextBox HorizontalAlignment="Left" Text="{Binding sideALabel, Mode=TwoWay}" Style="{StaticResource TextBoxStyle}" Width="400" />
             <StackPanel Orientation="Horizontal"  Margin="0 80 0 0">
-                <Image x:Name="SideAImage" HorizontalAlignment="Left" Height="180" VerticalAlignment="Top" Width="200" Source="{Binding image}"/>
+                <Image x:Name="SideAImage" HorizontalAlignment="Left" Height="180" VerticalAlignment="Top" Width="200" Source="{Binding sideAImage}"/>
                 <StackPanel Orientation="Vertical">
                     <Button x:Name="InsertImageFromFileSideA" Content="" FontFamily="Segoe UI Symbol" Tapped="InsertImageFromFileSideA_Tapped" ToolTipService.ToolTip="Add Picture from a file" />
                     <Button Content="" FontFamily="Segoe UI Symbol" ToolTipService.ToolTip="Paste a picture" IsEnabled="False" />
@@ -51,6 +51,13 @@
         <StackPanel Orientation="Vertical"  Grid.Row="2" Grid.Column="2" x:Name="SideBStackPanel" >
             <TextBlock Text="Content:" Style="{StaticResource LabelStyle}" />
             <TextBox HorizontalAlignment="Left" Text="{Binding sideBLabel, Mode=TwoWay}" Style="{StaticResource TextBoxStyle}" Width="400" />
+            <StackPanel Orientation="Horizontal"  Margin="0 80 0 0">
+                <Image x:Name="SideBImage" HorizontalAlignment="Left" Height="180" VerticalAlignment="Top" Width="200" Source="{Binding sideBImage}"/>
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="InsertImageFromFileSideB" Content="" FontFamily="Segoe UI Symbol" Tapped="InsertImageFromFileSideB_Tapped" ToolTipService.ToolTip="Add Picture from a file" />
+                    <Button Content="" FontFamily="Segoe UI Symbol" ToolTipService.ToolTip="Paste a picture" IsEnabled="False" />
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

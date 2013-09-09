@@ -22,7 +22,7 @@
         <DataTemplate x:Key="SideATemplate" x:Name="SideATemplate">
             <Grid Background="White" Width="400" Height="200">
                 <StackPanel Orientation="Vertical">
-                    <Image Source="{Binding image}" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="100" MaxWidth="200"/>
+                    <Image Source="{Binding sideAImage}" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="100" MaxWidth="200"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding   sideALabel}" TextWrapping="Wrap" FontSize="24" Foreground="#333333"/>
                 </StackPanel>
             </Grid>
@@ -30,7 +30,7 @@
         <DataTemplate x:Key="SideBTemplate" x:Name="SideBTemplate">
             <Grid Background="White" Width="400" Height="200">
                 <StackPanel Orientation="Vertical">
-                    <Image Source="{Binding image}" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="100" MaxWidth="200"/>
+                    <Image Source="{Binding sideBImage}" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="100" MaxWidth="200"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding   sideBLabel}" TextWrapping="Wrap" FontSize="24" Foreground="#333333"/>
                 </StackPanel>
             </Grid>

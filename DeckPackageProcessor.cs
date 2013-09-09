@@ -161,7 +161,11 @@ namespace QuizCards
                                 }
                                 else if (reader.Name.Equals("sideaimage"))
                                 {
-                                    currentCard.setImage("ms-appdata:///temp/" + System.Net.WebUtility.HtmlDecode(reader.ReadElementContentAsString()));
+                                    currentCard.setSideAImage("ms-appdata:///temp/" + System.Net.WebUtility.HtmlDecode(reader.ReadElementContentAsString()));
+                                }
+                                else if (reader.Name.Equals("sidebimage"))
+                                {
+                                    currentCard.setSideBImage("ms-appdata:///temp/" + System.Net.WebUtility.HtmlDecode(reader.ReadElementContentAsString()));
                                 }
 
                             }
@@ -207,9 +211,23 @@ namespace QuizCards
                     ZipArchiveEntry en;
                     foreach (Card c in this.deck.cards)
                     {
-                        if (c.hasImage())
+                        if (c.hasSideAImage())
                         {
-                            segments = c.image.UriSource.Segments;
+                            segments = c.sideAImage.UriSource.Segments;
+                            StorageFile inFile = await tmpFolder.GetFileAsync(segments[segments.Count() - 1]); //to be copied
+
+                            using (Stream s = await inFile.OpenStreamForReadAsync()) //incoming stream
+                            {
+                                en = archive.CreateEntry(segments[segments.Count() - 1]);
+                                using (Stream sout = en.Open()) //outgoing stream. Can't use en.Open() directly because it won't get properly disposed.
+                                {
+                                    await s.CopyToAsync(sout);
+                                }
+                            }
+                        }
+                        if (c.hasSideBImage())
+                        {
+                            segments = c.sideBImage.UriSource.Segments;
                             StorageFile inFile = await tmpFolder.GetFileAsync(segments[segments.Count() - 1]); //to be copied
 
                             using (Stream s = await inFile.OpenStreamForReadAsync()) //incoming stream
@@ -269,10 +287,15 @@ namespace QuizCards
                     s.AppendLine("<card>");
                     s.AppendLine("<sidealabel>" + System.Net.WebUtility.HtmlEncode(c.sideALabel) + "</sidealabel>");
                     s.AppendLine("<sideblabel>" + System.Net.WebUtility.HtmlEncode(c.sideBLabel) + "</sideblabel>");
-                    if (c.hasImage())
+                    if (c.hasSideAImage())
                     {
-                        segments = c.image.UriSource.Segments;
+                        segments = c.sideAImage.UriSource.Segments;
                         s.AppendLine("<sideaimage>"+ System.Net.WebUtility.HtmlEncode(segments[segments.Count()-1]) +"</sideaimage>");
+                    }
+                    if (c.hasSideBImage())
+                    {
+                        segments = c.sideBImage.UriSource.Segments;
+                        s.AppendLine("<sidebimage>" + System.Net.WebUtility.HtmlEncode(segments[segments.Count() - 1]) + "</sidebimage>");
                     }
                     s.AppendLine("</card>");
                 }

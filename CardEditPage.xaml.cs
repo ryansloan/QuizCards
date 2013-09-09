@@ -118,8 +118,21 @@ namespace QuizCards
                     await sout.FlushAsync();
                 }
             }
-            this.currentCard.setImage("ms-appdata:///temp/" + inFile.Name);
-            SideAImage.Source = this.currentCard.image;
+            if (side == "A")
+            {
+                this.currentCard.setSideAImage("ms-appdata:///temp/" + inFile.Name);
+                SideAImage.Source = this.currentCard.sideAImage;
+            }
+            else if (side == "B")
+            {
+                this.currentCard.setSideBImage("ms-appdata:///temp/" + inFile.Name);
+                SideBImage.Source = this.currentCard.sideBImage;
+            }
+        }
+
+        private void InsertImageFromFileSideB_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PickAndCopyImage("B");
         }
     }
 }
