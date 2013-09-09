@@ -45,6 +45,7 @@
                 <StackPanel Orientation="Vertical">
                     <Button x:Name="InsertImageFromFileSideA" Content="" FontFamily="Segoe UI Symbol" Tapped="InsertImageFromFileSideA_Tapped" ToolTipService.ToolTip="Add Picture from a file" />
                     <Button Content="" FontFamily="Segoe UI Symbol" ToolTipService.ToolTip="Paste a picture" IsEnabled="False" />
+                    <Button Content="" x:Name="ClearSideAImgBtn" FontFamily="Segoe UI Symbol" ToolTipService.ToolTip="Paste a picture" IsEnabled="False" Tapped="ClearSideAImgBtn_Tapped" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
@@ -56,6 +57,7 @@
                 <StackPanel Orientation="Vertical">
                     <Button x:Name="InsertImageFromFileSideB" Content="" FontFamily="Segoe UI Symbol" Tapped="InsertImageFromFileSideB_Tapped" ToolTipService.ToolTip="Add Picture from a file" />
                     <Button Content="" FontFamily="Segoe UI Symbol" ToolTipService.ToolTip="Paste a picture" IsEnabled="False" />
+                    <Button Content="" x:Name="ClearSideBImgBtn" FontFamily="Segoe UI Symbol" ToolTipService.ToolTip="Paste a picture" IsEnabled="False" Tapped="ClearSideBImgBtn_Tapped" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>

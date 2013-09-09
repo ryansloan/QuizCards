@@ -6,6 +6,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -87,6 +88,32 @@ namespace QuizCards {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        protected override void OnFileActivated(FileActivatedEventArgs args)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
+            if (rootFrame == null)
+            {
+                // Create a Frame to act as the navigation context and navigate to the first page
+                rootFrame = new Frame();
+
+            }
+            if (args.Files[0] != null)
+            {
+                StorageFile file = args.Files[0] as StorageFile;
+                Window.Current.Content = rootFrame;
+                Dictionary<String, Object> p = new Dictionary<String, Object>();
+                p.Add("DeckFile", file);
+                rootFrame.Navigate(typeof(DeckSummaryPage), p);
+            } else {
+                throw new Exception("Failed to create initial page");
+            }
+            // Ensure the current window is active
+            Window.Current.Activate();
         }
     }
 }

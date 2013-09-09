@@ -106,10 +106,6 @@ namespace QuizCards
             this._sideAImage.UriSource = new Uri(i2);
 
         }
-        public bool hasImages()
-        {
-            return ((this._sideAImage != null) || (this._sideBImage != null));
-        }
         public bool hasSideAImage()
         {
             return (this._sideAImage != null);
@@ -144,12 +140,17 @@ namespace QuizCards
         }
         public void emptyBitmap()
         {
-            if (this._sideAImage != null)
+            this.clearBitmap("A");
+            this.clearBitmap("B");
+        }
+        public void clearBitmap(string side)
+        {
+            if ((side == "A") && (this.hasSideAImage()))
             {
                 this._sideAImage.UriSource = null;
                 this._sideAImage = null;
             }
-            if (this._sideBImage != null)
+            else if ((side == "B") && (this.hasSideBImage()))
             {
                 this._sideBImage.UriSource = null;
                 this._sideBImage = null;

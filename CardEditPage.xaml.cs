@@ -56,6 +56,13 @@ namespace QuizCards
                     }
                     SideAStackPanel.DataContext = this.currentCard;
                     SideBStackPanel.DataContext = this.currentCard;
+                    if (this.currentCard.hasSideAImage()) {
+                        ClearSideAImgBtn.IsEnabled = true;
+                    }
+                    if (this.currentCard.hasSideBImage())
+                    {
+                        ClearSideBImgBtn.IsEnabled = true;
+                    }
                 }
                 else
                 {
@@ -126,17 +133,31 @@ namespace QuizCards
             {
                 this.currentCard.setSideAImage("ms-appdata:///temp/" + outFileName);
                 SideAImage.Source = this.currentCard.sideAImage;
+                ClearSideAImgBtn.IsEnabled = true;
             }
             else if (side == "B")
             {
                 this.currentCard.setSideBImage("ms-appdata:///temp/" + outFileName);
                 SideBImage.Source = this.currentCard.sideBImage;
+                ClearSideBImgBtn.IsEnabled = true;
             }
         }
 
         private void InsertImageFromFileSideB_Tapped(object sender, TappedRoutedEventArgs e)
         {
             PickAndCopyImage("B");
+        }
+
+        private void ClearSideAImgBtn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.currentCard.clearBitmap("A");
+            ClearSideAImgBtn.IsEnabled= false;
+        }
+
+        private void ClearSideBImgBtn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.currentCard.clearBitmap("B");
+            ClearSideBImgBtn.IsEnabled = false;
         }
     }
 }
