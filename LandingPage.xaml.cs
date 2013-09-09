@@ -33,6 +33,7 @@ namespace QuizCards
 
             FileOpenPicker picker = new FileOpenPicker();
             picker.FileTypeFilter.Add(".zip");
+            picker.FileTypeFilter.Add(".qcd");
             StorageFile file = await picker.PickSingleFileAsync();
             if (file != null)
             {

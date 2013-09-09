@@ -19,6 +19,17 @@
         <DefaultTile ShowName="allLogos" />
         <SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#497959" />
       </VisualElements>
+      <Extensions>
+        <Extension Category="windows.fileTypeAssociation">
+          <FileTypeAssociation Name="deck">
+            <DisplayName>QuizCard Deck</DisplayName>
+            <Logo>Assets/Icon.png</Logo>
+            <SupportedFileTypes>
+              <FileType ContentType="deck/quizcard-deck">.qcd</FileType>
+            </SupportedFileTypes>
+          </FileTypeAssociation>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>

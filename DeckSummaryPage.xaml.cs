@@ -169,7 +169,7 @@ namespace QuizCards
         private async void SaveDeck()
         {
             FileSavePicker picker = new FileSavePicker();
-            picker.FileTypeChoices.Add("QuizCard Deck", new string[] { ".zip" });
+            picker.FileTypeChoices.Add("QuizCard Deck", new string[] { ".qcd" });
             StorageFile file = await picker.PickSaveFileAsync();
             if (file != null)
             {
