@@ -30,6 +30,7 @@ namespace QuizCards
         public async Task<bool> readPackageAsync(StorageFile file)
         {
             this.deckDescriptionFound = false;
+            this.deck.filename = file.Name;
             bool result = false;
             //Locate Archive based on this.packagePath
             var folder = ApplicationData.Current.TemporaryFolder;
@@ -153,7 +154,6 @@ namespace QuizCards
                                 else if (reader.Name.Equals("sidealabel"))
                                 {
                                     currentCard.sideALabel = System.Net.WebUtility.HtmlDecode(reader.ReadElementContentAsString());
-                                    Debug.WriteLine("Reading card labeled " + currentCard.sideALabel);
                                 }
                                 else if (reader.Name.Equals("sideblabel"))
                                 {
@@ -258,7 +258,7 @@ namespace QuizCards
                 }
             }
 
-            return false;
+            return true;
         }
 
         public bool deckToXml()

@@ -77,8 +77,13 @@ namespace QuizCards
         }
         private void BackBtn_Tapped(object sender, RoutedEventArgs e)
         {
+            //autosave deck
+            if (this.currentDeck.filename == null)
+            {
+                this.currentDeck.filename = this.currentDeck.title + ".qcd";
+            }
+            SaveDeckFromFileName();
             //Viewing a deck->Quizzing->View blows up backstack, so use Navigate instead.
-            this.currentDeck.disposeOfBitmaps();
             this.Frame.Navigate(typeof(LandingPage));
         }
 
@@ -163,19 +168,33 @@ namespace QuizCards
 
         private void SaveDeckBtn_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            SaveDeck();
-
+            PickSaveFile();
         }
-        private async void SaveDeck()
+        private async void SaveDeckFromFileName() {
+            var folder = ApplicationData.Current.LocalFolder;
+            StorageFile outfile = await folder.CreateFileAsync(this.currentDeck.filename);
+            await SaveDeck(outfile);
+            this.currentDeck.disposeOfBitmaps();
+        }
+        private async Task<bool> SaveDeck(StorageFile file)
+        {
+            if (file != null)
+            {
+                DeckPackageProcessor dpp = new DeckPackageProcessor();
+                return await dpp.writePackageAsync(file, this.currentDeck);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private async void PickSaveFile()
         {
             FileSavePicker picker = new FileSavePicker();
             picker.FileTypeChoices.Add("QuizCard Deck", new string[] { ".qcd" });
             StorageFile file = await picker.PickSaveFileAsync();
-            if (file != null)
-            {
-                DeckPackageProcessor dpp = new DeckPackageProcessor();
-                await dpp.writePackageAsync(file, this.currentDeck);
-            }
+            SaveDeck(file);
         }
+
     }
 }

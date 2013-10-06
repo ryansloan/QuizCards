@@ -10,6 +10,7 @@ namespace QuizCards
 {
     public class Deck : INotifyPropertyChanged
     {
+        public String filename;
         private String _title;
         public String title
         {
