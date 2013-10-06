@@ -29,8 +29,8 @@
         </StackPanel>
         <TextBlock x:Name="ProgressTextBlock"  HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="Auto"  FontFamily="Segoe UI" FontWeight="Light" FontSize="28" Foreground="#ffffff" TextAlignment="Center" Text="" Grid.Row="2" Grid.Column="1"/>
         <ProgressRing x:Name="progring" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="3" Grid.ColumnSpan="3" />
-        <Button x:Name="NextCardBtn" Content="Next" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center" Width="249" Click="NextCardBtn_Click" FontFamily="Segoe UI" FontSize="32" Grid.Row="1" Grid.Column="2"/>
-        <Button x:Name="PrevCardBtn" Content="Previous" HorizontalAlignment="Right" Height="Auto" VerticalAlignment="Center" Width="233" Click="PrevCardBtn_Click" FontFamily="Segoe UI" FontSize="32" Grid.Row="1" Grid.Column="0"/>
+        <Button x:Name="NextCardBtn" Content="" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Center"  Click="NextCardBtn_Click" FontFamily="Segoe UI Symbol" FontSize="32" Grid.Row="1" Grid.Column="2"/>
+        <Button x:Name="PrevCardBtn" Content="" HorizontalAlignment="Right" Height="Auto" VerticalAlignment="Center" Click="PrevCardBtn_Click" FontFamily="Segoe UI Symbol" FontSize="32" Grid.Row="1" Grid.Column="0"/>
 
     </Grid>
 </Page>
